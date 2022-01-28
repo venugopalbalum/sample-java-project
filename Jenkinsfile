@@ -1,15 +1,15 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3.8.1-adoptopenjdk-11'
-            args '-v $HOME/.m2:/root/.m2'
+            image 'cameronmcnz/ant-jdk8-git:latest'
+            
         }
      }
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'mvn clean install'
+                sh 'ant clean compile test package war'
             }
         }
         stage('Test') {
